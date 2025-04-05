@@ -36,19 +36,19 @@ wss.on('connection', async (ws) => {
             await pc.setLocalDescription(answer);
             ws.send(JSON.stringify(answer));
             console.log('Answer sent');
-        } else if (data.type === 'candidate' && data.candidate) {
-            try {
-                const candidateObj = {
-                    candidate: data.candidate,
-                    sdpMid: data.sdpMid || '0',
-                    sdpMLineIndex: data.sdpMLineIndex !== undefined ? Number(data.sdpMLineIndex) : 0
-                };
-                await pc.addIceCandidate(new wrtc.RTCIceCandidate(candidateObj));
-                console.log('ICE candidate added:', candidateObj);
-            } catch (err) {
-                console.error('Error adding ICE candidate:', err.message);
-            }
-        }
+       } else if (data.type === 'candidate' && data.candidate) {
+    try {
+        const candidateObj = {
+            candidate: data.candidate,
+            sdpMid: data.sdpMid || '0',
+            sdpMLineIndex: data.sdpMLineIndex !== undefined ? Number(data.sdpMLineIndex) : 0
+        };
+        await pc.addIceCandidate(new wrtc.RTCIceCandidate(candidateObj));
+        console.log('ICE candidate added:', candidateObj);
+    } catch (err) {
+        console.error('Error adding ICE candidate:', err.message);
+    }
+}
     });
 
     pc.onicecandidate = (event) => {
