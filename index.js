@@ -41,7 +41,7 @@ wss.on('connection', async (ws) => {
                 const candidateObj = {
                     candidate: data.candidate,
                     sdpMid: data.sdpMid || '0',
-                    sdpMLineIndex: data.sdpMLineIndex !== null ? Number(data.sdpMLineIndex) : 0
+                    sdpMLineIndex: data.sdpMLineIndex !== undefined ? Number(data.sdpMLineIndex) : 0
                 };
                 await pc.addIceCandidate(new wrtc.RTCIceCandidate(candidateObj));
                 console.log('ICE candidate added:', candidateObj);
